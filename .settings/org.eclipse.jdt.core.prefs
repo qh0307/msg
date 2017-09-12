@@ -4,4 +4,8 @@ org.eclipse.jdt.core.compiler.codegen.targetPlatform=1.8
 org.eclipse.jdt.core.compiler.compliance=1.8
 org.eclipse.jdt.core.compiler.problem.assertIdentifier=error
 org.eclipse.jdt.core.compiler.problem.enumIdentifier=error
+<<<<<<< HEAD
+=======
+org.eclipse.jdt.core.compiler.problem.forbiddenReference=warning
+>>>>>>> branch 'master' of ssh://git@github.com/qh0307/msg.git
 org.eclipse.jdt.core.compiler.source=1.8
