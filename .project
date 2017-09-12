@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
+<<<<<<< HEAD
 	<name>tests</name>
+=======
+	<name>msg</name>
+>>>>>>> branch 'master' of ssh://git@github.com/qh0307/msg.git
 	<comment></comment>
 	<projects>
 	</projects>

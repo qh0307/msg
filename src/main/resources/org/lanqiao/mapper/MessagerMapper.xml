@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.lanqiao.dao.MessagerDao">
+  <resultMap id="MessagerResult" type="org.lanqiao.entity.Messager">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="date" jdbcType="DATE" property="date" />
+  </resultMap>
+  
+  
+  <select id="getMessagerByPage" resultType="org.lanqiao.entity.Messager">
+  select 
+   <include refid="Base_Column_List" />
+ from messager order by id desc limit #{1},#{0}
+  </select>
+  
+  <select id="getMessagercount"  resultType="java.lang.Integer">
+  select count(*) from messager
+  </select>
+ <insert id="insertMessager" useGeneratedKeys="true" keyProperty="id" parameterType="org.lanqiao.entity.Messager">
+         insert into messager(name,content,date)values (#{name},#{content},#{date})
+ </insert>  
+ <select id="searchMsg" parameterType="hashMap" resultType="org.lanqiao.entity.Messager">
+       
+ select*from messager
+ <trim  prefix="where" prefixOverrides="and|or">
+ <if test="title!=null">
+    name like #{title}
+ </if>
+ <if test="beginTime!=null" >
+ 
+   and date>=#{beginTime}
+ </if>
+<if test="endTime!=null" >
+ 
+   <![CDATA[and date<=#{endTime}]]>
+ </if>
+ </trim>
+
+ </select>
+  
+  
+  <sql id="Base_Column_List">
+    id, name, content, date
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="MessagerResult">
+    select 
+    <include refid="Base_Column_List" />
+    from messager
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from messager
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.lanqiao.entity.Messager">
+    insert into messager (id, name, content, 
+      date)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
+      #{date,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="org.lanqiao.entity.Messager">
+    insert into messager
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="date != null">
+        date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.lanqiao.entity.Messager">
+    update messager
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null">
+        date = #{date,jdbcType=DATE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.lanqiao.entity.Messager">
+    update messager
+    set name = #{name,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      date = #{date,jdbcType=DATE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
